@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Intimi Segreti – Gioco Erotico</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a1a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+            text-align: center;
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #ad1457;
+        }
+        .card {
+            background-color: #333;
+            border: 2px solid #e91e63;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 600px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin: 20px;
+        }
+        #timer {
+            font-size: 24px;
+            margin-top: 10px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <h1>💌 Intimi Segreti</h1>
+    <button onclick="drawCard()">Pesca una Carta</button>
+    <div id="card" class="card">Premi il pulsante per iniziare</div>
+    <div id="timer">⏱️</div>
+
+    <audio id="sound" src="https://cdn.pixabay.com/download/audio/2023/03/30/audio_5c8d665d5e.mp3?filename=card-flip.mp3" preload="auto"></audio>
+
+    <script>
+        const cards = [
+            "🔹 Fantasia Rivelata: Raccontami una fantasia erotica che non hai mai condiviso prima.",
+            "🔹 Cosa mi eccita di te: Dimmi tre cose che trovi estremamente eccitanti in me (fisiche o comportamentali).",
+            "❤️ Sfida delle Mani: Sfiorami per 2 minuti interi senza usare le mani.",
+            "❤️ Calore Crescente: Usa un cubetto di ghiaccio o qualcosa di caldo per stimolare tre parti del mio corpo.",
+            "💋 Parole Sporche: Parlami sporco per 1 minuto. Nessuna inibizione. Poi si scambiano i ruoli.",
+            "🖤 Desiderio Tabù: Hai mai avuto un pensiero erotico che consideri ‘sbagliato’? Raccontamelo ora.",
+            "💋 Ruolo a Due: Scegliamo un gioco di ruolo e iniziamo a interpretarlo per 5 minuti.",
+            "🔹 Toy Talk: Hai mai pensato di usare un sex toy con me? Quale e perché?",
+            "❤️ Posizione a Sorpresa: Proponi una posizione che non abbiamo mai provato. Parliamone.",
+            "🖤 3 Desideri Erotici: Scrivi 3 desideri sessuali che vorresti provare con me. Scambiamoli e scegliamone uno."
+        ];
+
+        function drawCard() {
+            const randomIndex = Math.floor(Math.random() * cards.length);
+            const selectedCard = cards[randomIndex];
+            document.getElementById("card").innerText = selectedCard;
+            document.getElementById("sound").play();
+            startTimer(60);
+        }
+
+        function startTimer(seconds) {
+            const timer = document.getElementById("timer");
+            let remaining = seconds;
+            timer.innerText = "⏱️ " + remaining + " secondi";
+            const interval = setInterval(() => {
+                remaining--;
+                if (remaining > 0) {
+                    timer.innerText = "⏱️ " + remaining + " secondi";
+                } else {
+                    clearInterval(interval);
+                    timer.innerText = "⏱️ Tempo scaduto!";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
