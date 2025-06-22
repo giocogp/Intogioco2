@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>🎲 IS games – Gioco Erotico</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        button {
+            background: #e91e63;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            margin: 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        button:hover {
+            background: #c2185b;
+        }
+        .card {
+            background: #333;
+            border: 2px solid #e91e63;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            font-size: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 120px;
+        }
+        #timer {
+            font-size: 24px;
+            color: #ffcc00;
+            margin-top: 10px;
+        }
+        select {
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎲 IS games</h1>
+    <p>Scegli una categoria e inizia il gioco!</p>
+    <select id="categorySelect">
+        <option value="mentale">🧠 Mentale – Scoprirsi</option>
+        <option value="fisico">🔥 Fisico – Sperimentare</option>
+        <option value="esplicito">🔞 Esplicito – Agire</option>
+        <option value="cuore_oscuro">🖤 Cuore Oscuro (Bonus)</option>
+    </select>
+    <br>
+    <button onclick="drawCard()">Pesca una Carta</button>
+    <div id="card" class="card">Premi "Pesca una Carta" per iniziare</div>
+    <div id="timer">⏱️</div>
+    <audio id="sound" src="https://cdn.pixabay.com/download/audio/2023/03/30/audio_5c8d665d5e.mp3?filename=card-flip.mp3" preload="auto"></audio>
+
+    <script>
+        const cards = {
+            mentale: Array.from({length: 50}, (_, i) => `🧠 Carta Mentale ${i+1}: Domanda mentale o fantasia #${i+1}.`),
+            fisico: Array.from({length: 50}, (_, i) => `🔥 Carta Fisica ${i+1}: Attività sensoriale o contatto #${i+1}.`),
+            esplicito: Array.from({length: 50}, (_, i) => `🔞 Carta Esplicita ${i+1}: Azione erotica o gioco diretto #${i+1}.`),
+            cuore_oscuro: [
+                "🖤 Desiderio Tabù: Hai mai avuto un pensiero erotico che consideri ‘sbagliato’ o troppo audace per raccontarlo? Raccontamelo ora.",
+                "🖤 Toy Fantasia: C’è un sex toy che ti incuriosisce ma ti vergogni a usare? Proviamo a comprarlo insieme?",
+                "🖤 3 Desideri Erotici: Scrivi segretamente 3 desideri sessuali che vorresti provare con me. Scambiamoli e scegliamone uno da esaudire stasera."
+            ]
+        };
+
+        const usedCards = {
+            mentale: [],
+            fisico: [],
+            esplicito: [],
+            cuore_oscuro: []
+        };
+
+        function drawCard() {
+            const category = document.getElementById("categorySelect").value;
+            const available = cards[category].filter(c => !usedCards[category].includes(c));
+            if (available.length === 0) {
+                document.getElementById("card").innerText = "Hai esaurito tutte le carte di questa categoria!";
+                return;
+            }
+            const index = Math.floor(Math.random() * available.length);
+            const card = available[index];
+            usedCards[category].push(card);
+            document.getElementById("card").innerText = card;
+            document.getElementById("sound").play();
+            startTimer(60);
+        }
+
+        function startTimer(seconds) {
+            const timer = document.getElementById("timer");
+            let remaining = seconds;
+            timer.innerText = `⏱️ ${remaining} secondi`;
+            const interval = setInterval(() => {
+                remaining--;
+                if (remaining > 0) {
+                    timer.innerText = `⏱️ ${remaining} secondi`;
+                } else {
+                    clearInterval(interval);
+                    timer.innerText = "⏱️ Tempo scaduto!";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
